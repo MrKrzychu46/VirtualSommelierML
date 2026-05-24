@@ -6,8 +6,7 @@ import os
 
 # Konfiguracja strony
 st.set_page_config(
-    page_title="Wirtualny Sommelier 🍷",
-    page_icon="🍷",
+    page_title="Wirtualny Sommelier",
     layout="centered"
 )
 
@@ -44,7 +43,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-title">Wirtualny Sommelier 🍷</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Wirtualny Sommelier</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Wprowadź laboratoryjne cechy fizykochemiczne wina, a model sztucznej inteligencji (Random Forest) oceni jego jakość.</div>', unsafe_allow_html=True)
 
 @st.cache_resource
@@ -68,7 +67,7 @@ slider_defs = {
     'density': ("Gęstość wina (g/cm³)", 0.9900, 1.0040, 0.0001, 0.9967, "Gęstość wina zbliżona do gęstości wody, zależna od cukru i alkoholu.")
 }
 
-st.markdown("### 🧪 Parametry laboratoryjne wina:")
+st.markdown("### Parametry laboratoryjne wina:")
 
 user_inputs = {}
 
@@ -87,21 +86,20 @@ for feature in required_features:
 st.markdown("---")
 
 # Predykcja
-if st.button("Zbadaj Jakość Wina 🍇"):
+if st.button("Zbadaj Jakość Wina"):
     input_df = pd.DataFrame([user_inputs])
     
     prediction = model_pipeline.predict(input_df)[0]
     probabilities = model_pipeline.predict_proba(input_df)[0]
     prob_percent = probabilities[prediction] * 100
     
-    st.markdown("### 📊 Wynik Oceny Sommeliera:")
+    st.markdown("### Wynik Oceny Sommeliera:")
     
     if prediction == 1:
-        st.balloons()
-        st.success("### **Wino Dobre / Premium! ⭐**")
+        st.success("### **Wino Dobre / Premium!**")
         st.info(f"Model sztucznej inteligencji prognozuje klasę **PREMIUM** z prawdopodobieństwem **{prob_percent:.1f}%**.")
     else:
-        st.error("### **Wino Przeciętne / Słabe 🍷**")
+        st.error("### **Wino Przeciętne / Słabe**")
         st.warning(f"Model sztucznej inteligencji prognozuje klasę **PRZECIĘTNĄ** z prawdopodobieństwem **{prob_percent:.1f}%**.")
 
 st.caption("Projekt końcowy: Uczenie Maszynowe II — Wirtualny Sommelier")

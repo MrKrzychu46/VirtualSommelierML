@@ -88,13 +88,13 @@ if __name__ == "__main__":
     print("=" * 65)
 
     best_model_name = max(cv_results, key=cv_results.get)
-    print(f"\n🏆 ZWYCIĘZCA WALIDACJI KRZYŻOWEJ: {best_model_name} (Średnie Accuracy: {cv_results[best_model_name]:.4f})")
+    print(f"\nZWYCIĘZCA WALIDACJI KRZYŻOWEJ: {best_model_name} (Średnie Accuracy: {cv_results[best_model_name]:.4f})")
     
     if best_model_name == "Las Losowy":
         print("Model Lasu Losowego świetnie generalizuje i idealnie nadaje się do ekstrakcji cech biznesowych!")
         
         print("\n" + "=" * 65)
-        print("🎯 ROZPOCZYNANIE STROJENIA HIPERPARAMETRÓW DLA LASU LOSOWEGO (GridSearchCV)...")
+        print("ROZPOCZYNANIE STROJENIA HIPERPARAMETRÓW DLA LASU LOSOWEGO (GridSearchCV)...")
         print("=" * 65)
         
         # Definiujemy siatkę parametrów
@@ -130,6 +130,6 @@ if __name__ == "__main__":
         # Porównanie z domyślnym
         baseline_diff = grid_search.best_score_ - cv_results["Las Losowy"]
         if baseline_diff > 0:
-            print(f"📈 Poprawa dokładności dzięki dostrojeniu: +{baseline_diff:.4f} (+{baseline_diff*100:.2f}%)")
+            print(f"Poprawa dokładności dzięki dostrojeniu: +{baseline_diff:.4f} (+{baseline_diff*100:.2f}%)")
         else:
             print("Model z domyślnymi parametrami okazał się optymalny.")
