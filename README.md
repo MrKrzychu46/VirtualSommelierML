@@ -1,4 +1,4 @@
-# Wirtualny Sommelier 🍷 | Projekt Analizy i Klasyfikacji Jakości Wina Czerwonego
+# Wirtualny Sommelier | Projekt Analizy i Klasyfikacji Jakości Wina Czerwonego
 
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Machine Learning](https://img.shields.io/badge/Machine%20Learning-scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
@@ -127,10 +127,10 @@ source .venv/bin/activate
 ```
 
 ### Krok 2: Instalacja wymaganych bibliotek
-Zainstaluj zależności za pomocą menedżera pakietów `pip`:
+Zainstaluj zależności z pliku `requirements.txt`:
 
 ```bash
-pip install pandas numpy scikit-learn statsmodels matplotlib seaborn joblib streamlit
+pip install -r requirements.txt
 ```
 
 ### Krok 3: Wygenerowanie i eksport modelu ML

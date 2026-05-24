@@ -91,7 +91,7 @@ if __name__ == "__main__":
         X_test_final = pd.DataFrame(imputer_reg.transform(X_test_num), columns=X_test_num.columns, index=X_test_num.index)
         y_test_final = y_test
 
-    print(f"✅ [ZATWIERDZONO IMPUTACJĘ: {najlepsza_metoda} | Baseline Accuracy: {val_acc:.4f}]")
+    print(f"[ZATWIERDZONO IMPUTACJĘ: {najlepsza_metoda} | Baseline Accuracy: {val_acc:.4f}]")
 
     print("\n--- Etap 1b: Analiza skośności i logarytmowanie ---")
     skew_threshold = 0.75
@@ -112,10 +112,10 @@ if __name__ == "__main__":
 
     if acc_trans > val_acc:
         X_train_final, X_val_final, X_test_final = X_train_trans, X_val_trans, X_test_trans
-        print(f"✅ [ZATWIERDZONO: Transformacja logarytmiczna (Poprawa z {val_acc:.4f} na {acc_trans:.4f})]")
+        print(f"[ZATWIERDZONO: Transformacja logarytmiczna (Poprawa z {val_acc:.4f} na {acc_trans:.4f})]")
         val_acc = acc_trans
     else:
-        print("❌ [ODRZUCONO: Transformacja logarytmiczna nie poprawiła wyniku. Zachowano oryginalne cechy.]")
+        print("[ODRZUCONO: Transformacja logarytmiczna nie poprawiła wyniku. Zachowano oryginalne cechy.]")
 
     print("\n--- Etap 1c: Standaryzacja cech (StandardScaler) ---")
     scaler = StandardScaler()
@@ -127,10 +127,10 @@ if __name__ == "__main__":
 
     if acc_std > val_acc:
         X_train_final, X_val_final, X_test_final = X_train_std, X_val_std, X_test_std
-        print(f"✅ [ZATWIERDZONO: Standaryzacja (Poprawa z {val_acc:.4f} na {acc_std:.4f})]")
+        print(f"[ZATWIERDZONO: Standaryzacja (Poprawa z {val_acc:.4f} na {acc_std:.4f})]")
         val_acc = acc_std
     else:
-        print("❌ [ODRZUCONO: Standaryzacja nie poprawiła wyniku. Zachowano nieprzeskalowane cechy.]")
+        print("[ODRZUCONO: Standaryzacja nie poprawiła wyniku. Zachowano nieprzeskalowane cechy.]")
 
     print("\n--- Etap 1d: Redukcja współliniowości (VIF) ---")
     def compute_vif(df_vif):
@@ -171,10 +171,10 @@ if __name__ == "__main__":
         acc_vif = test_knn(X_train_vif, X_val_vif, y_train_final, y_val_final, "Po redukcji VIF")
         if acc_vif >= val_acc:
             X_train_final, X_val_final, X_test_final = X_train_vif, X_val_vif, X_test_vif
-            print(f"✅ [ZATWIERDZONO: Redukcja VIF (Wynik: {acc_vif:.4f}, Usunięto: {removed_vif})]")
+            print(f"[ZATWIERDZONO: Redukcja VIF (Wynik: {acc_vif:.4f}, Usunięto: {removed_vif})]")
             val_acc = acc_vif
         else:
-            print(f"❌ [ODRZUCONO: Redukcja VIF pogorszyła model baseline (Spadek do {acc_vif:.4f}). Przywracam cechy.]")
+            print(f"[ODRZUCONO: Redukcja VIF pogorszyła model baseline (Spadek do {acc_vif:.4f}). Przywracam cechy.]")
     else:
         print("--- Brak współliniowych cech do usunięcia.")
 
@@ -202,16 +202,16 @@ if __name__ == "__main__":
             if acc_clean >= val_acc:
                 X_train_final = X_train_clean
                 y_train_final = y_train_clean
-                print(f"✅ [ZATWIERDZONO: Usunięto obserwacje wpływowe. Nowe Baseline Accuracy: {acc_clean:.4f}]")
+                print(f"[ZATWIERDZONO: Usunięto obserwacje wpływowe. Nowe Baseline Accuracy: {acc_clean:.4f}]")
                 val_acc = acc_clean
             else:
-                print(f"❌ [ODRZUCONO: Usunięcie pogorszyło model. Zostajemy przy starym zbiorze. Accuracy: {val_acc:.4f}]")
+                print(f"[ODRZUCONO: Usunięcie pogorszyło model. Zostajemy przy starym zbiorze. Accuracy: {val_acc:.4f}]")
         else:
             print("--- Brak obserwacji drastycznie wpływowych.")
     except Exception as e:
-        print(f"⚠️ [POMINIĘTO Cook'a: Logit zwrócił błąd: {e}]")
+        print(f"[POMINIĘTO Cook'a: Logit zwrócił błąd: {e}]")
 
     print("\n" + "=" * 55)
-    print(f"🎉 ETAP 1 UKOŃCZONY. Ostateczna dokładność walidacji K-NN: {val_acc:.4f}")
+    print(f"ETAP 1 UKOŃCZONY. Ostateczna dokładność walidacji K-NN: {val_acc:.4f}")
     print(f"Końcowe cechy: {X_train_final.columns.tolist()}")
     print("=" * 55)

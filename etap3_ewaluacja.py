@@ -63,7 +63,7 @@ if __name__ == "__main__":
         y_train_clean = y_train_val.iloc[safe_indices]
         print(f"Usunięto {len(cooks_d) - len(safe_indices)} wpływowych obserwacji. Nowy rozmiar zbioru treningowego: {len(X_train_clean)}")
     except Exception as e:
-        print(f"⚠️ [Logit Cook'a zwrócił błąd: {e}. Trenuję na pełnym zbiorze treningowym]")
+        print(f"[Logit Cook'a zwrócił błąd: {e}. Trenuję na pełnym zbiorze treningowym]")
         X_train_clean = X_train_val
         y_train_clean = y_train_val
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     test_acc = accuracy_score(y_test, y_pred_test)
 
     print("\n" + "=" * 55)
-    print(f"🏆 OSTATECZNA DOKŁADNOŚĆ NA ZBIORZE TESTOWYM: {test_acc:.4f}")
+    print(f"OSTATECZNA DOKŁADNOŚĆ NA ZBIORZE TESTOWYM: {test_acc:.4f}")
     print("=" * 55)
 
     print("\nRAPORT KLASYFIKACJI (ZBIÓR TESTOWY):")
