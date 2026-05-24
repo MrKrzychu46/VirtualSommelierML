@@ -67,7 +67,7 @@ Projekt został ustrukturyzowany w sposób modularny, odzwierciedlający najleps
 ## 3. Struktura Repozytorium
 
 ```text
-MLZKRZYCHEM-master/
+VirtualSommelierML/
 │
 ├── data/
 │   └── winequality-red.csv       # Surowy zbiór danych wina czerwonego (z Kaggle)
